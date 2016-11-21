@@ -16,6 +16,14 @@ final class BlogController{
     
     func addRoutes(drop: Droplet){
         drop.post("submitBlog", handler: submit)
+        drop.get("blogs", handler: index)
+    }
+    
+    func index(request: Request) throws -> ResponseRepresentable{
+        
+        
+        return try JSON(node: Blog.all().makeNode())
+        
     }
 
     func submit(request:Request) throws -> ResponseRepresentable{
@@ -28,7 +36,8 @@ final class BlogController{
         
         var blog = Blog(link: text, username: user)
         try blog.save()
+    
         
-        return try JSON(node: ["text": "Thanks mate", "attachments":["text":"woot"]])
+        return try JSON(node: ["text": "Thanks Mate", "attachments":["text":"woot"]])
     }
 }
