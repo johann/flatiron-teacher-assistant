@@ -31,6 +31,11 @@ final class BlogController{
             throw Abort.badRequest
         }
         guard let text = request.formURLEncoded?["text"]?.string else {
+        
+            throw Abort.badRequest
+        }
+        
+        if !text.contains("http"){
             throw Abort.badRequest
         }
         
