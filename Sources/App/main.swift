@@ -11,7 +11,7 @@ import Foundation
 import SwiftyBeaverVapor
 import SwiftyBeaver
 
-import SlackKit
+//import SlackKit
 
 
 //let drop = Droplet()
@@ -32,9 +32,9 @@ drop.addProvider(sbProvider)
 let log = drop.log.self
 
 
-let response = Response(text: "Hello, World!", responseType: .InChannel)
-let webhook = WebhookServer(token: "w9BDQy2xVVo2QgUoMPJtQDYV", route: "submitBlog", response: response)
-webhook.start()
+//let response = Response(text: "Hello, World!", responseType: .InChannel)
+//let webhook = WebhookServer(token: "w9BDQy2xVVo2QgUoMPJtQDYV", route: "submitBlog", response: response)
+//webhook.start()
 
 
 drop.get("login") { request in
