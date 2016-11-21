@@ -20,12 +20,16 @@ let auth = AuthMiddleware<MainUser>()
 let database = Database(MemoryDriver())
 
 
-let drop = Droplet(database: database, availableMiddleware: ["auth": auth, "trustProxy": TrustProxyMiddleware()], preparations: [MainUser.self, Book.self])
+
+
+let drop = Droplet(database: database, availableMiddleware: ["auth": auth, "trustProxy": TrustProxyMiddleware()], preparations: [MainUser.self, Book.self, Blog.self])
 
 
 let console = ConsoleDestination()
 let sbProvider = SwiftyBeaverProvider(destinations: [console])
 
+let blog = BlogController()
+blog.addRoutes(drop: drop)
 
 try drop.addProvider(VaporPostgreSQL.Provider.self)
 drop.addProvider(sbProvider)

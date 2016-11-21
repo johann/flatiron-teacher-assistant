@@ -14,19 +14,21 @@ import HTTP
 final class BlogController{
     
     
-    func addRoutes(drop:Droplet){
+    func addRoutes(drop: Droplet){
         drop.post("submitBlog", handler: submit)
     }
 
     func submit(request:Request) throws -> ResponseRepresentable{
+        guard let user = request.formURLEncoded?["user_name"]?.string else {
+            throw Abort.badRequest
+        }
+        guard let text = request.formURLEncoded?["text"]?.string else {
+            throw Abort.badRequest
+        }
         
+        var blog = Blog(link: text, username: user)
+        try blog.save()
         
-        
-        
-//        guard let isbn = req.data["isbn"]?.string else{
-//            throw Abort.badRequest
-//        }
-//        guard let
-        return try JSON(node: ["hey": "there"])
+        return try JSON(node: ["text": "Thanks mate", "attachments":["text":"woot"]])
     }
 }
